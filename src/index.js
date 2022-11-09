@@ -1,22 +1,28 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
+import SudokuBoard from './SudokuBoard.js';
 
 
 
-function handleTriangleForm(event) {
+function handleForm(event) {
   event.preventDefault();
-  document.querySelector('#response').innerText = null;
-  const length2 = parseInt(document.querySelector('#length2').value);
-  const length1 = parseInt(document.querySelector('#length1').value);
-  const length3 = parseInt(document.querySelector('#length3').value);
-  const triangle = new Triangle(length1, length2, length3);
-  const response = triangle.checkType();
-  const pTag = document.createElement("p");
-  pTag.append(response);
-  document.querySelector('#response').append(pTag);
+  const size = document.getElementById("size").value;
+  for(let i = 0; i < size; i++){
+    const divRow = document.createElement("div");
+    for(let j = 0; j < size; j++){
+      const input = document.createElement("input");
+      input.setAttribute("type", "number");
+      input.setAttribute("id", i+j);
+      input.value = 0;
+      divRow.append(input);
+      divRow.append(document.createElement("br"));
+
+    }
+    document.getElementById("board").append(divRow);
+  }
 }
 
-window.addEventListener("load", function() {
-  document.querySelector("#triangle-checker-form").addEventListener("submit", handleTriangleForm);
+window.addEventListener("load", function () {
+  this.document.getElementById("board-form").addEventListener("submit", handleForm);
 });
